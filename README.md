@@ -1,4 +1,4 @@
-# Repo Search
+# ['Repo Search'](http://webalex.cf/repo_search/)
 
 With 'Repo Search' you have possibility to search any repositories in github.
 
@@ -22,3 +22,5 @@ Clone this repo and then in command line type:
 * `gulp` generate project and run webserver
 
 Implementation with Angular.js and GitHub REST API.
+
+Go to ['Repo Search'](http://webalex.cf/repo_search/)
