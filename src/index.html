@@ -1,0 +1,75 @@
+﻿<!doctype html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <link href="css/main.css" rel="stylesheet"> 
+    <script src="libs/angular/angular.min.js"></script>    
+</head>
+
+<body ng-controller="appCtrl">
+
+    <section class="search-block">
+        <h1 class="search-block__title">Repo Search</h1>
+        <p class="search-block__description">Enter the name of the repository which you want to find</p>
+        <div class="search-block__input">
+            <input class="input-query" type="text" placeholder="Enter the repo name..."
+                ng-model="userQuery"  />
+            <button class="input-button"
+                ng-click="checkInputForm(userQuery, 1)">
+                <span ng-class="{'active': states.activeItem}" 
+                      ng-click="states.activeItem = 1">SEARCH
+                </span>
+            </button>
+        </div>
+    </section> <!-- __________/ search-block -->
+
+    <section class="result-block hidden">    
+        <div class="result-block__description"> 
+            <div>{{ totalData }} repository results</div>
+            <div>Sort:
+                <select ng-model="sort">
+                    <option value="name">Name</option>
+                    <option value="-stargazers_count">Stars</option>
+                </select>
+            </div>
+        </div> 
+     
+        <table class="result-block__table">
+            <tr>
+                <th>Project name</th>
+                <th>Author</th>
+                <th>Number of stars</th>
+                <th class="none">Number of issues</th>
+                <th class="none">Avatar</th>
+                <th class="none">Private or Public</th>
+                <th class="none">Link to repo</th>
+            </tr>
+            <tr ng-repeat="x in myData | orderBy:sort">
+                <td>{{ x.name }}</td>
+                <td>{{ x.owner.login }}</td>
+                <td>{{ x.stargazers_count }}</td>
+                <td class="none">{{ x.open_issues_count }}</td>
+                <td class="none"><img ng-src="{{ x.owner.avatar_url }}" alt="avatar" /></td>
+                <td class="none">{{ x.private | privateDateTransformation }}</td>
+                <td class="none"><a ng-href="{{ x.html_url }}" title="Go to the repository of this project" target="_blank">Link</a></td>
+            </tr>
+        </table>
+        
+        <div class="result-block__current">Page: <span>{{ currentPage }}</span> / {{ numberBtnPagination }}</div>
+        
+        <div class="result-block__pagination">
+            <button class="paginationBtn" 
+                    ng-click="getCurrentPage(userQuery, $index)" 
+                    ng-repeat="x in btnArr track by $index" 
+                    userhover>
+                <span ng-class="{'active': x.i == states.activeItem}" 
+                      ng-click="states.activeItem = x.i">
+                    {{ x.i }}
+                </span>
+            </button>
+        </div>
+    </section><!-- __________/ result-block -->
+    
+<script src="js/main.js"></script>
+</body>
+</html>

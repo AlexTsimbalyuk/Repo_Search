@@ -1,0 +1,14 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Angular #
+/build
+
+# dependencies
+/node_modules
+
+# misc
+npm-debug.log
+
+.bowerrc
